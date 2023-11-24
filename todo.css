@@ -117,7 +117,7 @@ input[type="checkbox"] {
         /* 
             note that the `lh` unit is only supported on
             the latest version of firefox (and not at all on IE).
-            a workaround for this would be setting the line height
+            the workaround for this is setting the line height
             manually and setting the height accordingly. This is 
             shiny and new though :)
         */
@@ -125,6 +125,11 @@ input[type="checkbox"] {
         overflow-y: hidden;
         z-index: 3;
         position: relative;
+
+        @supports not (height: 1lh) {
+            line-height: 1rem;
+            max-height: 10rem;
+        }
     }
 
     & .show-input:checked + .text-container {
@@ -152,6 +157,10 @@ input[type="checkbox"] {
         width: 100%;
         background-color: white;
         z-index: 2;
+
+        @supports not (height: 1lh) {
+            height: 10rem;
+        }
     }
 
 }
