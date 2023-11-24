@@ -1,11 +1,17 @@
 .todo-widget {
     & ol {
         list-style: none;
+
         /* hide elements after first 10 by default  */
         & li:nth-of-type(n+11) {
             display: none;
         }
 
+        /*
+            hide the show button by default and
+            only show if there exists an 11th
+            element before it
+        */
         & .show-label {
             display: none;
             visibility: hidden;
