@@ -1,3 +1,7 @@
+body {
+    background: white;
+}
+
 .show-label {
     /* 
         show more/show less label is hidden by default.
@@ -67,6 +71,10 @@
     margin-bottom: 16px;
     font-size: 1rem;
     width: 200px;
+    position: relative;
+    height: auto; 
+    overflow-y: hidden;
+
     & .text-container {
         /* 
             note that the `lh` unit is only supported on
@@ -77,6 +85,8 @@
         */
         max-height: 10lh;
         overflow-y: hidden;
+        z-index: 3;
+        position: relative;
     }
 
     & .show-input:checked + .text-container {
@@ -84,8 +94,26 @@
         height: auto;
     }
 
-    .show-label {
+    & .show-label {
         display: block;
         visibility: visible;
+        z-index: 1;
+        height: 1rem;
     }
+
+    /* 
+        some unfortunate hacks to hide the
+        show more/less label when smaller than
+        10 * line height. my kingdom for working
+        container queries
+    */
+    & .hider {
+        position: absolute;
+        top: 0;
+        height: 10lh;
+        width: 100%;
+        background-color: white;
+        z-index: 2;
+    }
+
 }
