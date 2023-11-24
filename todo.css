@@ -1,4 +1,9 @@
 .show-label {
+    /* 
+        show more/show less label is hidden by default.
+        logic for showing the label is handled within
+        individual widget styles
+    */
     display: none;
     visibility: hidden;
 }
@@ -27,6 +32,7 @@
 .todo-widget {
     & ol {
         list-style: none;
+        padding: 0;
 
         /* hide elements after first 10 by default  */
         & li:nth-of-type(n+11) {
@@ -54,5 +60,32 @@
                 }
             }
         }
+    }
+}
+
+.text-widget {
+    margin-bottom: 16px;
+    font-size: 1rem;
+    width: 200px;
+    & .text-container {
+        /* 
+            note that the `lh` unit is only supported on
+            the latest version of firefox (and not at all on IE).
+            a workaround for this would be setting the line height
+            manually and setting the height accordingly. This is 
+            shiny and new though :)
+        */
+        max-height: 10lh;
+        overflow-y: hidden;
+    }
+
+    & .show-input:checked + .text-container {
+        max-height: 100%;
+        height: auto;
+    }
+
+    .show-label {
+        display: block;
+        visibility: visible;
     }
 }
