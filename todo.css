@@ -1,3 +1,29 @@
+.show-label {
+    display: none;
+    visibility: hidden;
+}
+
+.show-input {
+    display: none;
+
+    & ~ label::after {
+        color: black;
+        cursor: pointer;
+    }
+
+    /*
+        logic for changing the show more/show less text
+        based on the input :checked state
+    */
+    &:not(:checked) ~ label::after {
+        content: "Show more";
+    }
+
+    &:checked ~ label::after {
+        content: "Show less";
+    }
+}
+
 .todo-widget {
     & ol {
         list-style: none;
@@ -12,19 +38,12 @@
             only show if there exists an 11th
             element before it
         */
-        & .show-label {
-            display: none;
-            visibility: hidden;
-        }
-
         & li:nth-of-type(11) ~ .show-label {
             display: block;
             visibility: visible;
         }
 
-        & #show-more {
-            display: none;
-
+        & .show-input {
             /* 
                 If the show-more input is checked,
                 the 11th+ li elements can be shown  
@@ -33,25 +52,6 @@
                 & ~ li:nth-of-type(n+11){
                     display: block;
                 }
-            }
-
-
-
-            & ~ label::after {
-                color: black;
-                cursor: pointer;
-            }
-
-            /*
-                logic for changing the show more/show less text
-                based on the input :checked state
-            */
-            &:not(:checked) ~ label::after {
-                content: "Show more";
-            }
-
-            &:checked ~ label::after {
-                content: "Show less";
             }
         }
     }
