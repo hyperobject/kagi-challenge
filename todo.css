@@ -1,5 +1,18 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 body {
     background: white;
+    font-size: 16px;
+    padding: 2rem;
+    margin: auto;
+}
+
+input[type="checkbox"] {
+    margin-right: 0.5rem;
 }
 
 .show-label {
@@ -10,6 +23,18 @@ body {
     */
     display: none;
     visibility: hidden;
+
+    /* shared styles */
+    margin-top: 1rem;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    &:hover {
+        &::after {
+            text-decoration: underline;
+            color: #777;
+        }
+    }
 }
 
 .show-input {
@@ -34,9 +59,22 @@ body {
 }
 
 .todo-widget {
+    padding: 1rem;
+    border: 1px solid silver;
+    border-radius: 0.5rem;
+    width: 20rem;
+
+    & h1 {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+    }
     & ol {
         list-style: none;
         padding: 0;
+
+        & li {
+            margin-bottom: 0.75rem;
+        }
 
         /* hide elements after first 10 by default  */
         & li:nth-of-type(n+11) {
