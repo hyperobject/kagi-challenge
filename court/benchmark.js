@@ -1,9 +1,6 @@
 /**
  * @type {[yourName: string, judges: number, otherNames: string][]}
  */
-window.testCases = [];
-window.numCases = 0;
-window.loaded = false;
 
 const setup = async () => {
     /*
@@ -14,11 +11,6 @@ const setup = async () => {
         these extra cases are provided to demonstrate the performance of
         each individual implementation as the number of people grows
     */
-    const req = await fetch('test_cases_100.json')
-    const json = await req.json();
-    window.testCases = json.cases;
-    window.numCases = window.testCases.length;
-    window.loaded = true;
 }
 
 /**
@@ -36,15 +28,30 @@ const benchmark = (implementation, tests) => {
     return performance.measure('impl', 'impl-start', 'impl-end').duration/tests.length;
 }
 
-const runTests = () => {
-    if (!window.loaded) {
-        console.error('not loaded yet!');
-        return;
-    }
-    
-    document.getElementById("naive-results").innerText = `Implementation 1: ${benchmark(courtNaive, window.testCases)} ms/iteration`
-    document.getElementById("math-results").innerText = `Implementation 2: ${benchmark(courtMath, window.testCases)} ms/iteration`
-    document.getElementById("no-sort-results").innerText = `Implementation 3: ${benchmark(courtNoSort, window.testCases)} ms/iteration`
+const runTests = async () => {
+    let req = await fetch('test_cases.json')
+    let json = await req.json();
+    let tests = json.cases;
+
+    document.querySelector(".test-basic .naive-results").innerText = `Implementation 1: ${benchmark(courtNaive, tests)} ms/iteration`;
+    document.querySelector(".test-basic .math-results").innerText = `Implementation 2: ${benchmark(courtMath, tests)} ms/iteration`;
+    document.querySelector(".test-basic .no-sort-results").innerText = `Implementation 3: ${benchmark(courtNoSort, tests)} ms/iteration`;
+
+    req = await fetch('test_cases_50.json')
+    json = await req.json();
+    tests = json.cases;
+
+    document.querySelector(".test-50 .naive-results").innerText = `Implementation 1: ${benchmark(courtNaive, tests)} ms/iteration`;
+    document.querySelector(".test-50 .math-results").innerText = `Implementation 2: ${benchmark(courtMath, tests)} ms/iteration`;
+    document.querySelector(".test-50 .no-sort-results").innerText = `Implementation 3: ${benchmark(courtNoSort, tests)} ms/iteration`;
+
+    req = await fetch('test_cases_100.json')
+    json = await req.json();
+    tests = json.cases;
+
+    document.querySelector(".test-100 .naive-results").innerText = `Implementation 1: ${benchmark(courtNaive, tests)} ms/iteration`;
+    document.querySelector(".test-100 .math-results").innerText = `Implementation 2: ${benchmark(courtMath, tests)} ms/iteration`;
+    document.querySelector(".test-100 .no-sort-results").innerText = `Implementation 3: ${benchmark(courtNoSort, tests)} ms/iteration`;
 
 }
 

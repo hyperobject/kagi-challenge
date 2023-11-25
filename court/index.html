@@ -4,12 +4,28 @@
         <script type="text/javascript" src="benchmark.js"></script>
     </head>
     <body onload="setup()">
+        <h1>Court time benchmarks</h1>
         <button onclick="runTests()">Run benchmarks</button>
+        <h2>Basic tests</h2>
         <p>Results (in ms/iteration)</p>
-        <ul>
-            <li id="naive-results">Implementation 1:</li>
-            <li id="math-results">Implementation 2:</li>
-            <li id="no-sort-results">Implementation 3:</li>
+        <ul class="test-basic">
+            <li class="naive-results">Implementation 1:</li>
+            <li class="math-results">Implementation 2:</li>
+            <li class="no-sort-results">Implementation 3:</li>
+        </ul>
+        <h2>50 other people tests</h2>
+        <p>Results (in ms/iteration)</p>
+        <ul class="test-50">
+            <li class="naive-results">Implementation 1:</li>
+            <li class="math-results">Implementation 2:</li>
+            <li class="no-sort-results">Implementation 3:</li>
+        </ul>
+        <h2>100 other people tests</h2>
+        <p>Results (in ms/iteration)</p>
+        <ul class="test-100">
+            <li class="naive-results">Implementation 1:</li>
+            <li class="math-results">Implementation 2:</li>
+            <li class="no-sort-results">Implementation 3:</li>
         </ul>
     </body>
 </html>
