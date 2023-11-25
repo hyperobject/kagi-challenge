@@ -1,0 +1,169 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: white;
+    font-size: 16px;
+    padding: 2rem;
+    margin: auto;
+}
+
+.widgets-container {
+    display: flex;
+    height: 100%;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.widget {
+    flex: none;
+    padding: 1rem;
+    border: 1px solid silver;
+    border-radius: 0.5rem;
+    width: 20rem;
+
+    & h1 {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+    }
+
+    & input[type="checkbox"] {
+        margin-right: 0.5rem;
+    }
+
+    & .show-label {
+        /* 
+            show more/show less label is hidden by default.
+            logic for showing the label is handled within
+            individual widget styles
+        */
+        display: none;
+        visibility: hidden;
+
+        /* shared styles */
+        margin-top: 1rem;
+        text-align: center;
+        cursor: pointer;
+        font-weight: bold;
+
+        &:hover {
+            &::after {
+                text-decoration: underline;
+                color: #777;
+            }
+        }
+    }
+
+    & .show-input {
+        display: none;
+
+        & ~ label::after {
+            color: black;
+            cursor: pointer;
+        }
+
+        /*
+            logic for changing the show more/show less text
+            based on the input :checked state
+        */
+        &:not(:checked) ~ label::after {
+            content: "Show more";
+        }
+
+        &:checked ~ label::after {
+            content: "Show less";
+        }
+    }
+}
+
+.todo-widget {
+    & ol {
+        list-style: none;
+        padding: 0;
+
+        & li {
+            margin-bottom: 0.75rem;
+        }
+
+        /* hide elements after first 10 by default  */
+        & li:nth-of-type(n + 11) {
+            display: none;
+        }
+
+        /*
+            hide the show button by default and
+            only show if there exists an 11th
+            element before it
+        */
+        & li:nth-of-type(11) ~ .show-label {
+            display: block;
+            visibility: visible;
+        }
+
+        & .show-input {
+            /* 
+                If the show-more input is checked,
+                the 11th+ li elements can be shown  
+            */
+            &:checked {
+                & ~ li:nth-of-type(n + 11) {
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+.text-widget {
+    & .text-container {
+        /* 
+            a prefix-free version of this would use the lh unit, 
+            but given that support for -webkit-box and -webkit-line-clamp
+            is currently better, this seems like a good option. 
+            It also makes adding an ellipsis at the end of the clamped lines
+            a little easier, which is a nice bonus.
+        */
+        display: -webkit-box;
+        -webkit-line-clamp: 10;
+        -webkit-box-orient: vertical;
+        word-break: break-word;
+        overflow: hidden;
+        position: relative;
+        text-overflow: ellipsis;
+    }
+
+    & .show-input:checked + .text-container {
+        -webkit-line-clamp: 15;
+    }
+
+    & .show-label {
+        display: block;
+        visibility: visible;
+        height: 1rem;
+    }
+
+    /* 
+        some unfortunate hacks to hide the
+        show more/less label when smaller than
+        10 * line height. Unused for now.
+    
+    & .hider {
+        position: absolute;
+        top: 0;
+        height: 10lh;
+        width: 100%;
+        background-color: white;
+        z-index: 2;
+
+        @supports not (height: 1lh) {
+            height: 10rem;
+        }
+    }
+    */
+}
