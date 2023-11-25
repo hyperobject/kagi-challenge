@@ -22,11 +22,12 @@ body {
 }
 
 .widget {
-    flex: none;
+    flex-grow: 1;
+    flex-shrink: none;
     padding: 1rem;
     border: 1px solid silver;
     border-radius: 0.5rem;
-    width: 20rem;
+    max-width: 20rem;
 
     & h1 {
         font-size: 1.75rem;
