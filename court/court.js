@@ -87,7 +87,8 @@ const courtMath = (yourName, judges, otherNames) => {
 
 /**
  * Solution that eliminates both a call to .sort()
- * (which is likely O(n log n)) and all array manipulation.  
+ * (which is likely O(n log n)) and all array manipulation
+ * aside from an initial string split.
  * @param {string} yourName 
  * @param {number} judges 
  * @param {string} otherNames 
