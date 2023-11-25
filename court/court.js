@@ -107,12 +107,12 @@ const courtNoSort = (yourName, judges, otherNames) => {
 
     // O(n)
     const names = otherNames.split(' ');
-    for (const name in names) {
-        if (name > yourName) {
+    let yourPosition = 0;
+    for (const name of names) {
+        if (name < yourName) {
             yourPosition++;
         }
     }
-    let yourPosition = 0;
 
     // not sure what the performance of ceil or division is
     return Math.ceil((yourPosition + 1)/judges) * 30; 
