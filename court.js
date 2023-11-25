@@ -20,12 +20,16 @@ court(“Jules", 3, "Adam Betty Frank Mike”)
 
 court(“Zane", 1, “Mark Hank Ana Vivian”)
 150
-
-pos 0 => 30
 */
 
 
-// naive implementation
+/**
+ * Naive implementation
+ * @param {string} yourName 
+ * @param {number} judges 
+ * @param {string} otherNames 
+ * @returns {number}
+ */
 const courtNaive = (yourName, judges, otherNames) => {
     if (judges >= 5) {
         // there are enough judges for everyone
@@ -52,12 +56,16 @@ const courtNaive = (yourName, judges, otherNames) => {
     }
 }
 
+/**
+ * Faster solution that eliminates the
+ * for loop in favor of some simple arithmetic
+ * @param {string} yourName 
+ * @param {number} judges 
+ * @param {string} otherNames 
+ * @returns {number}
+ */
 const courtMath = (yourName, judges, otherNames) => {
-    /*
-        This solution should be a little faster since it
-        eliminates the for loop in favor of some simple
-        arithmetic
-    */
+
     if (judges >= 5) {
         // there are enough judges for everyone
         return 30;
@@ -77,14 +85,19 @@ const courtMath = (yourName, judges, otherNames) => {
 }
 
 
-// naive implementation
+/**
+ * Solution that eliminates both a call to .sort()
+ * (which is likely O(n log n)) and all array manipulation.  
+ * @param {string} yourName 
+ * @param {number} judges 
+ * @param {string} otherNames 
+ * @returns {number}
+ */
 const courtNoSort = (yourName, judges, otherNames) => {
     /*
-        This solution is neat because it eliminates both a
-        call to .sort() (which is likely O(n log n)) and 
-        array manipulation. The key insight here is that 
-        we don't actually care about having the whole array
-        sorted, just how many people are in front of us in line.
+        The key insight here is that we don't actually
+        care about having the whole array sorted,
+        just how many people are in front of us in line.
     */
     if (judges >= 5) {
         // there are enough judges for everyone
