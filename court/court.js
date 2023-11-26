@@ -142,8 +142,13 @@ const courtNoArray = (yourName, judges, otherNames) => {
         twice (once for .split() and again for the actual
         line place logic).
 
-        It's also more space-efficient since we aren't allocating
-        an array for the split otherNames.
+        It's also probably more space-efficient since we
+        aren't allocating an array for the split otherNames.
+
+        HOWEVER: in practice, it seems to match or be slower than
+        courtNoSort. Possibly there's some optimizations on the
+        browser's side that makes this method slower than depending
+        on existing implementations
     */
     let yourPosition = 0;
     let adjustedPosition = false;
