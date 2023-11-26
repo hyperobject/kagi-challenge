@@ -36,6 +36,7 @@ const runTests = async () => {
     document.querySelector(".test-basic .naive-results").innerText = `Implementation 1: ${benchmark(courtNaive, tests)} ms/iteration`;
     document.querySelector(".test-basic .math-results").innerText = `Implementation 2: ${benchmark(courtMath, tests)} ms/iteration`;
     document.querySelector(".test-basic .no-sort-results").innerText = `Implementation 3: ${benchmark(courtNoSort, tests)} ms/iteration`;
+    document.querySelector(".test-basic .no-array-results").innerText = `Implementation 4: ${benchmark(courtNoArray, tests)} ms/iteration`;
 
     req = await fetch('test_cases_50.json')
     json = await req.json();
@@ -44,6 +45,7 @@ const runTests = async () => {
     document.querySelector(".test-50 .naive-results").innerText = `Implementation 1: ${benchmark(courtNaive, tests)} ms/iteration`;
     document.querySelector(".test-50 .math-results").innerText = `Implementation 2: ${benchmark(courtMath, tests)} ms/iteration`;
     document.querySelector(".test-50 .no-sort-results").innerText = `Implementation 3: ${benchmark(courtNoSort, tests)} ms/iteration`;
+    document.querySelector(".test-50 .no-array-results").innerText = `Implementation 4: ${benchmark(courtNoArray, tests)} ms/iteration`;
 
     req = await fetch('test_cases_100.json')
     json = await req.json();
@@ -52,6 +54,7 @@ const runTests = async () => {
     document.querySelector(".test-100 .naive-results").innerText = `Implementation 1: ${benchmark(courtNaive, tests)} ms/iteration`;
     document.querySelector(".test-100 .math-results").innerText = `Implementation 2: ${benchmark(courtMath, tests)} ms/iteration`;
     document.querySelector(".test-100 .no-sort-results").innerText = `Implementation 3: ${benchmark(courtNoSort, tests)} ms/iteration`;
+    document.querySelector(".test-100 .no-array-results").innerText = `Implementation 4: ${benchmark(courtNoArray, tests)} ms/iteration`;
 
 }
 

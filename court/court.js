@@ -117,3 +117,81 @@ const courtNoSort = (yourName, judges, otherNames) => {
     // not sure what the performance of ceil or division is
     return Math.ceil((yourPosition + 1)/judges) * 30; 
 }
+
+
+/**
+ * Solution that attempts to eliminate the use of arrays
+ * by replicating the behavior of String.split() with
+ * problem-relevant short-circuiting behavior
+ * @param {string} yourName 
+ * @param {number} judges 
+ * @param {string} otherNames 
+ * @returns {number}
+ */
+const courtNoArray = (yourName, judges, otherNames) => {
+
+    if (judges >= 5) {
+        // there are enough judges for everyone
+        return 30;
+    }
+
+    /*
+        This implementation is still O(n) but should be
+        slightly better optimized than courtNoSort since
+        the client doesn't need to iterate through otherNames
+        twice (once for .split() and again for the actual
+        line place logic).
+
+        It's also more space-efficient since we aren't allocating
+        an array for the split otherNames.
+    */
+    let yourPosition = 0;
+    let adjustedPosition = false;
+    let wordIndex = 0;
+    for (const letter of otherNames) {
+        if (letter === ' ') {
+            isNewWord = true;
+            adjustedPosition = false;
+            wordIndex = 0;
+            continue;
+        }
+
+        if (adjustedPosition) {
+            /*
+                this is basically just fast-forwarding
+                until the next word since we've already
+                established relative position. No need
+                to change wordIndex or anything
+            */
+            continue;
+        }
+
+        if (letter < yourName[wordIndex]) {
+            /*
+                If the current letter is first alphabetically,
+                bump yourPosition in line down by one, and mark
+                that we have already adjusted the position
+            */
+            yourPosition++;
+            adjustedPosition = true;
+            continue;
+        }
+
+        if (letter > yourName[wordIndex]) {
+            /*
+                If the current letter is later alphabetically,
+                yourName will come up in line first, so we don't
+                need to adjust our position at all
+            */
+            adjustedPosition = true;
+            continue;
+        }
+
+        // this fallthrough only happens when we have a matching letter
+        wordIndex++;
+        
+    }
+
+    // not sure what the performance of ceil or division is
+    return Math.ceil((yourPosition + 1)/judges) * 30; 
+}
