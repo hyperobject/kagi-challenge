@@ -78,10 +78,20 @@ const courtMath = (yourName, judges, otherNames) => {
     probably O(n log n) average case for Array.prototype.sort()
     does the string *need* to be split to an array?
     */
+
     const yourPosition = names.indexOf(yourName);
 
     // not sure what the performance of ceil or division is
-    return Math.ceil((yourPosition + 1)/judges) * 30; 
+    return Math.ceil(
+            /*
+                dividing your position by the number of judges
+                gives us the number of iterations the judges
+                will take to get through your hearing. Math.ceil()
+                is used on this value since you can't have a trial
+                with a fraction of a judge :)
+            */
+            (yourPosition + 1)/judges
+        ) * 30; // iterations * (time/iteration) = total time
 }
 
 
