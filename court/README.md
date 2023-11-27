@@ -24,8 +24,11 @@ I struggled to find further room for optimization, but as a last attempt I decid
 ## Epilogue: Benchmarking
 The [code for benchmarking](https://github.com/hyperobject/kagi-challenge/blob/main/court/benchmark.js) these methods is fairly straighforward. Given a method to benchmark and an array of arguments (`[yourName: string, judges: number, otherNames: string][]`), the `benchmark` function will [time](https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/User_timing) how long it takes to run the method on all provided examples, then divide that by the total number of examples to give a mean average of milliseconds per iteration.
 
-The examples were generated in Python using the `names` library and this function:
+The examples were generated in Python using the `names` library and this code:
 ```python
+import random
+import names
+
 def others(n):
    return ' '.join([names.get_first_name() for i in range(n)])
 
