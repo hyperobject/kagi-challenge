@@ -1,19 +1,4 @@
 /**
- * @type {[yourName: string, judges: number, otherNames: string][]}
- */
-
-const setup = async () => {
-    /*
-        test_cases.json contains 10k cases that match the problem description
-        test_cases_50.json contains 5k cases with 50 other people instead of 4
-        test_cases_100.json contains 5k cases with 100 other people instead of 4
-
-        these extra cases are provided to demonstrate the performance of
-        each individual implementation as the number of people grows
-    */
-}
-
-/**
  * Wrapper for running an implementation against our test cases
  * @param {(yourName: string, judges: number, otherNames: string) => number} implementation 
  * @param {[yourName: string, judges: number, otherNames: string][]} tests
@@ -29,6 +14,14 @@ const benchmark = (implementation, tests) => {
 }
 
 const runTests = async () => {
+    /*
+        test_cases.json contains 10k cases that match the problem description
+        test_cases_50.json contains 5k cases with 50 other people instead of 4
+        test_cases_100.json contains 5k cases with 100 other people instead of 4
+
+        these extra cases are provided to demonstrate the performance of
+        each individual implementation as the number of people grows
+    */
     let req = await fetch('test_cases.json')
     let json = await req.json();
     let tests = json.cases;
