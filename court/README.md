@@ -22,6 +22,21 @@ After realizing that shortcut, I was able to replace the $O(n \log n)$ average c
 I struggled to find further room for optimization, but as a last attempt I decided to see if there were any performance gains to be had from avoiding arrays entirely and just iterating through `otherNames`. My thinking was that there could be performance gains to be made by replacing a call to `.split()` with a near-equivalent method that included [problem-specific short-circuits](https://github.com/hyperobject/kagi-challenge/blob/5237677dbac6643c95a5212db3362b0bf755ae7e/court/court.js#L164C1-L193C10) where possible. Although this method is technically more space-efficient since an additional array doesn't need to be created, in practice it performs equivalently or worse than implementation 3 (as you'll see in the next section). This is likely due to array and string manipulations being more efficiently optimized on the browser side than I was able to here.
 
 ## Epilogue: Benchmarking
+The [code for benchmarking](https://github.com/hyperobject/kagi-challenge/blob/main/court/benchmark.js) these methods is fairly straighforward. Given a method to benchmark and an array of arguments (`[yourName: string, judges: number, otherNames: string][]`), the `benchmark` function will [time](https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/User_timing) how long it takes to run the method on all provided examples, then divide that by the total number of examples to give a mean average of milliseconds per iteration.
 
+The examples were generated in Python using the `names` library and this function:
+```python
+def others(n):
+   return ' '.join([names.get_first_name() for i in range(n)])
+
+def tests(numExamples, numOthers):
+    return [[names.get_first_name(), random.randrange(1, numOthers + 2), others(numOthers)] for i in range(numExamples)]
+```
+
+You can run the benchmark for yourself [here](https://kagi.cori.fyi/court), but anecdotally
+
+* Implementation 2 performed the same or slightly better than the naive solution
+* Implementation 3 generally ran at least 2x faster than implementation 2
+* Implementation 4 was somewhere between implementations 2 and 3 in terms of speed
 
 
